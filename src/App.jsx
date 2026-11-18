@@ -3,24 +3,18 @@ import '@telegram-apps/telegram-ui/dist/styles.css';
 import {
   AppRoot, Accordion, Avatar, AvatarStack, Badge, Banner, Blockquote,
   Breadcrumbs, Button, ButtonCell, Card, Cell, Checkbox, Chip, ColorInput,
-  CompactPagination, Divider, FileInput, FixedLayout, Headline, IconButton,
+  CompactPagination, CircularProgress, Divider, FileInput, FixedLayout, Headline, IconButton,
   IconContainer, Image, InlineButtons, Input, Link, List, Modal, Multiselect,
   Pagination, PinInput, Placeholder, Progress, Radio, Rating, Section, Select,
   Selectable, Slider, Skeleton, Spinner, Spoiler, Steps, Switch, Tabbar,
   TabsList, Text, Textarea, Title, Typography, Caption, LargeTitle, Subheadline,
   Info, Navigation, Tappable, VisuallyHidden, Tooltip, Popper, SegmentedControl,
-  Timeline,
+  Timeline, Snackbar,
 } from '@telegram-apps/telegram-ui';
 
+// Plain wrapper — an ErrorBoundary is used instead of a fake try/catch component
 function SafeSection({ children, header }) {
-  const [error, setError] = useState(null);
-  if (error) return <div style={{color:'red'}}>Section "{header}" failed to render</div>;
-  try {
-    return <Section header={header}>{children}</Section>;
-  } catch (e) {
-    setError(e.message);
-    return null;
-  }
+  return <Section header={header}>{children}</Section>;
 }
 
 export default function Showroom() {
@@ -73,7 +67,7 @@ export default function Showroom() {
           <Button size="l" mode="outline">Outline</Button>
           <Button size="l" mode="ghost">Ghost</Button>
           <Button size="l" stretched>Stretched</Button>
-          <IconButton icon="★" size="m" />
+          <IconButton size="m">★</IconButton>
           <ButtonCell before={<Avatar size={24} acronym="X" />} after="→">Button cell</ButtonCell>
         </SafeSection>
 
@@ -98,6 +92,7 @@ export default function Showroom() {
           <Progress value={60} />
           <CircularProgress size="large" progress={75} />
           <Spinner />
+          <Snackbar onClose={() => {}}>Snackbar message example</Snackbar>
           <Skeleton />
           <Spoiler summary="Click to reveal">Hidden spoiler content</Spoiler>
         </SafeSection>
